@@ -18,7 +18,6 @@
 
 import os
 import boto3
-from botocore.client import Config
 import logging
 from urllib.parse import urlparse, quote
 
@@ -34,11 +33,7 @@ def upload_to_s3(file_path, s3_url, access_key, secret_key, bucket_name, region)
         region_name=region
     )
     
-    client = session.client(
-    's3',
-    endpoint_url=s3_url,
-    config=Config(signature_version='s3v4')
-)
+    client = session.client('s3', endpoint_url=s3_url)
 
     try:
         # Upload the file to the specified S3 bucket
